@@ -29,6 +29,12 @@ def create_regions(world: MulitWorld, player: int, locations: Tuple[LocationData
         create_region(world, player, locations_per_region, location_cache, "Forgotten World")
     ]
 
-def set_rules(self)
-    set_rule(self.world.get_entrance("Keepers", self.player),
-             lambda state: state.has("Buran Tutorial", self.player))
+connect(world, player, names, 'Menu', 'Mountain Path')
+connect(world, player, names, 'Mountain Path', 'Keepers', lambda state: state._monsanct_done_tutorial(world, player))
+connect(world, player, names, 'Mountain Path', 'Blue Caves')
+connect(world, player, names, 'Keepers', 'Blue Caves', lambda state: state._monsanct_done_tutorial(world, player))
+connect(world, player, names, 'Mountain Path', 'Snowy Peaks', lambda state: state._monsanct_has_fly(world, player))
+connect(world, player, names, 'Blue Caves', 'Mountain Path', lambda state: state._monsanct_has_doublejump(world, player) and state:_monsanct_BlueCaveLever(world, player))
+connect(world, player, names, 'Blue Caves', 'Sun Palace', lambda state: state._monsanct_has_earth(world, player) and state._monsanct_has_lightning(world, player))
+connect(world, player, names, 'Blue Caves', 'Stronghold', lambda state: state._monsanct_StrongholdLever(world, player))
+connect(world, player, names, 'Blue Caves', 'Underworld', lambda state: state._monsanct_has_5tokens(world, player))
